@@ -23,30 +23,31 @@ export default class App extends React.Component {
 
   render() {
     const styleInfo = {
-      paddingRight:'10px'
+      paddingRight:'5em'
     }
     const elementStyle ={
       border:'solid',
-      borderRadius:'10px',
+      borderRadius:'10em',
       position:'relative',
-      left:'10vh',
-      height:'3vh',
-      width:'20vh',
-      marginTop:'5vh',
-      marginBottom:'10vh'
+      left:'10em',
+      height:'3em',
+      width:'20em',
+      marginTop:'5em',
+      marginBottom:'10em'
     }
 
     const items = Information.filter((data)=>{
-      if(this.state.search == null)
+      if(this.state.search == null) {
           return data
-      else if(data.firstName.toLowerCase().includes(this.state.search.toLowerCase()) || data.lastName.toLowerCase().includes(this.state.search.toLowerCase())){
+      } else if(data.firstName.trim().toLowerCase().includes(this.state.search.trim().toLowerCase()) || data.lastName.trim().toLowerCase().includes(this.state.search.trim().toLowerCase())){
           return data
       }
     }).map((data, index)=>{
       return(
-      <div key={index}>
-          <ul style={{position:'relative',left:'10vh'}}>
-            <span style={styleInfo}>{data.firstName} {data.lastName}</span>
+      <div className="message" key={index}>
+          <ul style={{position:'relative'}}>
+            <span style={styleInfo}>{`${data.firstName} ${data.lastName}`}</span>
+            <p className="text"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod...</p>
           </ul>
       </div>
       )
@@ -56,7 +57,7 @@ export default class App extends React.Component {
       <div>
 
         <div>
-          <input type="text" placeholder="Enter item to be searched" style={elementStyle} onChange={(e)=>this.searchSpace(e)} />
+          <input className="search-bar" type="text" placeholder="Search for a new chat" style={elementStyle} onChange={(e)=>this.searchSpace(e)} />
           {items}
         </div>
 
