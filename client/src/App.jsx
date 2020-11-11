@@ -1,5 +1,5 @@
+
 import React from 'react';
-// import Messages from './Messages.jsx';
 import Information from './information.js';
 
 export default class App extends React.Component {
@@ -7,14 +7,16 @@ export default class App extends React.Component {
     super(props)
     this.state = {
       search: null,
+      complete: false
     }
+    this.toggleComplete = this.toggleComplete.bind(this);
   }
 
-  // filterUpdate(value) {
-  //   this.setState = ({
-  //     search: value
-  //   })
-  // }
+  toggleComplete() {
+    this.setState({
+      complete: !this.state.complete
+    });
+  }
 
   searchSpace(event) {
     let keyword = event.target.value;
@@ -36,6 +38,9 @@ export default class App extends React.Component {
       marginBottom:'10em'
     }
 
+    const incompleteIcon = <span className="far fa-star todo-item-icon"></span>;
+    const completeIcon = <span className="fas fa-star todo-item-icon"></span>;
+
     const items = Information.filter((data)=>{
       if(this.state.search == null) {
           return data
@@ -44,27 +49,24 @@ export default class App extends React.Component {
       }
     }).map((data, index)=>{
       return(
-      <div className="message" key={index}>
-          <ul style={{position:'relative'}}>
-            <span style={styleInfo}>{`${data.firstName} ${data.lastName}`}</span>
-            <p className="text"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod...</p>
-          </ul>
-      </div>
+        <div className="message" key={index}>
+            <ul style={{position:'relative'}}>
+              <span style={styleInfo}>{`${data.firstName} ${data.lastName}`}</span>
+                <div className="text"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod...</div>
+                <div className="star" onClick={this.toggleComplete}>
+                  {this.state.complete ? completeIcon : incompleteIcon}
+                {/* <span className="todo-item-text">{this.props.item}</span> */}
+                </div>
+            </ul>
+        </div>
       )
     })
 
     return (
-      <div>
-
         <div>
           <input className="search-bar" type="text" placeholder="Search for a new chat" style={elementStyle} onChange={(e)=>this.searchSpace(e)} />
           {items}
         </div>
-
-        {/* <div>
-          <Messages />
-        </div> */}
-      </div>
     )
   }
 }
