@@ -46,8 +46,7 @@ export default class App extends React.Component {
       return(
       <div key={index}>
           <ul style={{position:'relative',left:'10vh'}}>
-            <span style={styleInfo}>{data.firstName}</span>
-            <span style={styleInfo}>{data.lastName}</span>
+            <span style={styleInfo}>{data.firstName} {data.lastName}</span>
           </ul>
       </div>
       )
